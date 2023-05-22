@@ -12,14 +12,14 @@ This is a Music Streaming Service API that allows two types of users: Normal and
 
 ## Prerequisites
 
-- Java 11
+- Java 17
 - MySQL Database
 - Internet connectivity
 
 ## API Documentation
 The API documentation is generated using Swagger. You can explore the available endpoints using the Swagger UI interface.
 
-To access the Swagger UI, open a web browser and go to http://localhost:8083/swagger-ui.html.
+To access the Swagger UI, open a web browser and go to http://localhost:8080/swagger-ui.html.
 
 The Swagger UI provides a user-friendly interface to view and interact with the API endpoints. You can try out the different operations, view request and response details, and even make test requests directly from the UI.
 
