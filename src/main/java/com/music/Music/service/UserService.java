@@ -2,14 +2,17 @@ package com.music.Music.service;
 
 import com.music.Music.dto.SignIn;
 import com.music.Music.model.AuthenticationToken;
+import com.music.Music.model.Song;
 import com.music.Music.model.Users;
 import com.music.Music.repositatory.IUserRepo;
 import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -18,6 +21,10 @@ public class UserService {
 
     @Autowired
     TokenService tokenService;
+
+    @Autowired
+    SongService
+    songService;
 
 
     public String addUser(Users user) {
@@ -88,6 +95,12 @@ public class UserService {
         return "Check Email and Password again";
 
 
+
+    }
+
+    public ResponseEntity<List<Song>> showSong() {
+        List<Song> songs=songService.findAllSong();
+        return ResponseEntity.ok ( songs );
 
     }
 }

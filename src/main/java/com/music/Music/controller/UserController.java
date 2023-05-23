@@ -1,15 +1,15 @@
 package com.music.Music.controller;
 
 import com.music.Music.dto.SignIn;
+import com.music.Music.model.Song;
 import com.music.Music.model.Users;
 import com.music.Music.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -35,5 +35,9 @@ public class UserController {
         }
 
         return ResponseEntity.ok ( "Please use this Token for making the request ->  "+  respone );
+    }
+    @GetMapping("showsongs")
+    public ResponseEntity<List<Song>> displaySong(){
+        return userService.showSong();
     }
 }

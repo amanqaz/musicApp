@@ -6,6 +6,8 @@ import com.music.Music.repositatory.ISongRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SongService {
     @Autowired
@@ -28,5 +30,9 @@ public class SongService {
             return "delete successfully";
         }
         return "Please check the Id and try again";
+    }
+
+    public List<Song> findAllSong() {
+       return iSongRepo.findAll ();
     }
 }
