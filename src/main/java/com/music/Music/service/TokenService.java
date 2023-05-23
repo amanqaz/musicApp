@@ -22,7 +22,7 @@ public class TokenService {
 
     public boolean tokenVaildation(String token, String email) {
         Admin admin =  adminService.findFirstByEmail ( email);
-        String password = admin.getPassword ();
+        String password = admin.getToken ().getToken ();
 
 
 

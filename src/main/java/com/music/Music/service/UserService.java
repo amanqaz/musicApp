@@ -30,6 +30,11 @@ public class UserService {
         {
            return "User already exists!!!!...sign in instead";
         }
+        String string=user.getPhone_Number ();
+        if(string.length ()==10){
+            string ="+91"+string;
+            user.setPhone_Number ( string );
+        }
 
 
 

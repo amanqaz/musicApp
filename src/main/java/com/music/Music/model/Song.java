@@ -26,6 +26,10 @@ public class Song {
     private LocalDate releasedDate = LocalDate.now ();
 
     @ManyToMany
+    @JsonIgnore
 
     private List<Users> user;
+    @ManyToOne
+    @JsonIgnore
+    private  Admin admin;
 }

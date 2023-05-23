@@ -25,9 +25,11 @@ public class Admin {
 
 
     @OneToMany
+    @JsonIgnore
     private List<Song> songs;
 
     @OneToOne
+    @JsonIgnore
     private AuthenticationToken token;
 
 }

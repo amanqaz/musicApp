@@ -52,7 +52,7 @@ public class AdminController {
         //token check
         boolean tokenVaildation = tokenService.tokenVaildation(token,email);
         if(tokenVaildation){
-            respone = songService.addSong(song);
+            respone = songService.addSong(song,email);
             return ResponseEntity.ok ( respone );
         }
         return ResponseEntity.badRequest ().body (  "you are not valid Admin");

@@ -1,5 +1,6 @@
 package com.music.Music.service;
 
+import com.music.Music.model.Admin;
 import com.music.Music.model.Song;
 import com.music.Music.repositatory.ISongRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,13 @@ import org.springframework.stereotype.Service;
 public class SongService {
     @Autowired
     ISongRepo iSongRepo;
+    @Autowired
+    AdminService adminService;
 
-    public String addSong(Song song) {
+    public String addSong(Song song,String email) {
+        Admin admin = adminService.findFirstByEmail ( email );
+        song.setAdmin ( admin );
+
         iSongRepo.save ( song );
         return "song Added successfully";
     }

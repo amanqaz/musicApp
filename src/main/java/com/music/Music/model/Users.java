@@ -1,10 +1,8 @@
 package com.music.Music.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +29,11 @@ public class Users {
     @Max(65)
     private int age;
 
+    @Pattern ( regexp = ("^\\+(?:[0-9] ?){6,14}[0-9]$"))
+    private  String phone_Number;
 
+    @JsonIgnore
     @OneToMany
     private List<Song> songs;
+
 }

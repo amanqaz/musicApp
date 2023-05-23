@@ -74,8 +74,9 @@ public class AdminService {
         if(realAdmin.getPassword ().equals ( dataPassword )){
             //token generated
             AuthenticationToken token = new AuthenticationToken(realAdmin);
+            realAdmin.setToken ( token );
 
-            tokenService.saveToken(token);
+        tokenService.saveToken(token);
             respone = token.getToken ();
             realAdmin.setToken ( new AuthenticationToken ( realAdmin ) );
             return respone;

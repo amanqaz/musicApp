@@ -20,6 +20,7 @@ public class UserController {
     @PostMapping("signUp")
     public ResponseEntity<String> addUser(@RequestBody Users user){
         String respone = userService.addUser(user);
+
         if(respone.equals ( "User already exists!!!!...sign in instead" )){
             return ResponseEntity.status ( HttpStatus.FORBIDDEN ).body ( respone );
         }
