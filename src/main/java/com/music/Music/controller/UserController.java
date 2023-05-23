@@ -40,4 +40,15 @@ public class UserController {
     public ResponseEntity<List<Song>> displaySong(){
         return userService.showSong();
     }
+
+    @PutMapping("markFavarate/{id}/{token}/{email}")
+    public ResponseEntity<String> markingFavorate(@PathVariable Long id,@PathVariable String token,@PathVariable String email){
+      return userService.markFavorate(id,token,email);
+    }
+
+    @GetMapping("userPlayList/{token}/{email}")
+    public ResponseEntity<List<Song>> userPlayList(@PathVariable String token , @PathVariable String email){
+        return  userService.userPlayList(token,email);
+    }
+
 }

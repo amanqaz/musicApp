@@ -4,6 +4,7 @@ import com.music.Music.dto.SignIn;
 import com.music.Music.model.AuthenticationToken;
 import com.music.Music.model.Song;
 import com.music.Music.model.Users;
+import com.music.Music.repositatory.ISongRepo;
 import com.music.Music.repositatory.IUserRepo;
 import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class UserService {
     @Autowired
     SongService
     songService;
+    @Autowired
+    private ISongRepo iSongRepo;
 
 
     public String addUser(Users user) {
@@ -88,6 +91,7 @@ public class UserService {
             AuthenticationToken token = new AuthenticationToken(realUser);
 
             tokenService.saveToken(token);
+            realUser.setToken ( token );
             respone = token.getToken ();
             return respone;
 
@@ -101,6 +105,35 @@ public class UserService {
     public ResponseEntity<List<Song>> showSong() {
         List<Song> songs=songService.findAllSong();
         return ResponseEntity.ok ( songs );
+
+    }
+
+    public ResponseEntity<String> markFavorate(Long id, String token, String email) {
+        Users user =  iUserRepo.findFirstByEmail ( email );
+        if(user==null){
+            return ResponseEntity.badRequest ().body ( "please check Email" );
+        }
+        Song song = songService.findById ( id );
+        if(song ==null){
+            return ResponseEntity.badRequest ().body ( "Invaild song !!! Please request to admin to added that song" );
+        }
+        List<Song> songList = user.getSongs ();
+        songList.add(song);
+         user.setSongs ( songList );
+         iUserRepo.save ( user );
+        return ResponseEntity.ok ( "song Added at your favorite list" );
+
+    }
+
+    public ResponseEntity<List<Song>> userPlayList(String token, String email) {
+        Users users = iUserRepo.findFirstByEmail ( email );
+        if(users == null)  return ResponseEntity.badRequest ().body ( null );
+        String vaildToken = users.getToken ().getToken ();
+        if(vaildToken.equals ( token )){
+            return ResponseEntity.ok ( users.getSongs () );
+        }
+        return ResponseEntity.badRequest ().body ( null );
+
 
     }
 }

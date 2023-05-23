@@ -35,5 +35,8 @@ public class Users {
     @JsonIgnore
     @OneToMany
     private List<Song> songs;
+    @JsonIgnore
+    @OneToOne(mappedBy = "user")
+    private AuthenticationToken token;
 
 }

@@ -35,4 +35,7 @@ public class SongService {
     public List<Song> findAllSong() {
        return iSongRepo.findAll ();
     }
+    public Song findById(Long id){
+       return iSongRepo.findBySongId (id);
+    }
 }
